@@ -15,7 +15,7 @@ const (
 )
 
 var (
-	_ framework.QueueSortPlugin = &WYQ{}
+	_ framework.QueueSortPlugin = &WYQ{} // 排序插件在集群中只能出现一个，如果存在默认的k8s调度器，则该插件无法使用.
 
 	_ framework.FilterPlugin     = &WYQ{}
 	_ framework.PreFilterPlugin  = &WYQ{}
