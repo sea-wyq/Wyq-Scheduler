@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-scheduling-config
+  namespace: kube-system
+data:
+   config.yaml: |
+    apiVersion: kubescheduler.config.k8s.io/v1beta2
+    kind: KubeSchedulerConfiguration
+    leaderElection:
+      leaderElect: false
+    profiles:
+    - schedulerName: wyq
+      plugins:
+        preFilter:
+          enabled:
+          - name: wyq
+            weight: 10
+        filter:
+          enabled:
+          - name: wyq
+            weight: 10
+        postFilter:
+          enabled:
+          - name: wyq
+        preScore:
+          enabled:
+          - name: wyq
+        score:
+          enabled:
+          - name: wyq
+        reserve:
+          enabled:
+          - name: wyq
+        permit:
+          enabled:
+          - name: wyq
+        preBind:
+          enabled:
+          - name: wyq
+        bind:
+          enabled:
+          - name: wyq
+        postBind:
+          enabled:
+          - name: wyq
+        
+
+
+          
