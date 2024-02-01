@@ -8,42 +8,45 @@ data:
     apiVersion: kubescheduler.config.k8s.io/v1beta2
     kind: KubeSchedulerConfiguration
     leaderElection:
-      leaderElect: false
+      leaderElect: true
+      resourceName: wyq
+      resourceNamespace: kube-system
     profiles:
     - schedulerName: wyq
       plugins:
         preFilter:
           enabled:
-          - name: wyq
-            weight: 10
+          - name: defalut
+          - name: filteringPod
         filter:
           enabled:
-          - name: wyq
-            weight: 10
+          - name: defalut
+          - name: filteringNode
         postFilter:
           enabled:
-          - name: wyq
+          - name: defalut
         preScore:
           enabled:
-          - name: wyq
+          - name: defalut
         score:
           enabled:
-          - name: wyq
+          - name: randScore
+            weight: 300
         reserve:
           enabled:
-          - name: wyq
+          - name: defalut
         permit:
           enabled:
-          - name: wyq
+          - name: defalut
         preBind:
           enabled:
-          - name: wyq
+          - name: defalut
         bind:
           enabled:
-          - name: wyq
+          - name: defalut
         postBind:
           enabled:
-          - name: wyq
+          - name: defalut
         
 
 

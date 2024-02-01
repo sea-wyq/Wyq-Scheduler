@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nodetoip
+  namespace: kube-system
+data:
+  nodetoip.json: |
+    {
+      "yigou-dev-102-44": "100.95.137.154",
+      "yigou-dev-102-45": "100.122.47.218",
+      "yigou-dev-102-46": "100.73.234.168"
+    }
+
+# 该节点主机名和 查询镜像的服务IP需要正确对应，如果服务修改，IP也需要修改

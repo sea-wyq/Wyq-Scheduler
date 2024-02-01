@@ -19,3 +19,6 @@ spec:
           name: nginx
           ports:
             - containerPort: 80
+          env:
+          - name: PUBLICIMAGE
+            value: registry.cnbita.com:5000/wuyiqiang/python3.9_cuda11.3_pytorch1.12:v1

@@ -13,7 +13,7 @@ spec:
       labels:
         app: test-scheduling
     spec:
-      nodeName: yigou-dev-102-45
+      nodeName: yigou-dev-102-46
       serviceAccount: test-scheduling-sa
       containers:
         - name: tests-cheduling
@@ -26,9 +26,20 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/kubernetes
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+            - name: node-to-ip
+              mountPath: /etc/nodetoip
       volumes:
         - name: config
           configMap:
             name: test-scheduling-config
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: node-to-ip
+          configMap:
+            name: nodetoip
+            
 ---
 # --v=5 不同等级的v可以控制日志打印的等级，v5 可以打印调度器所有插件的日志信息。

@@ -1,7 +1,10 @@
 package main
 
 import (
-	"Scheduler/pkg/wyq"
+	"Scheduler/pkg/defalut"
+	"Scheduler/pkg/filternode"
+	"Scheduler/pkg/filterpod"
+	"Scheduler/pkg/randscore"
 	"fmt"
 	"os"
 
@@ -11,7 +14,10 @@ import (
 
 func main() {
 	command := app.NewSchedulerCommand(
-		app.WithPlugin(wyq.Name, wyq.New),
+		app.WithPlugin(defalut.Name, defalut.New),
+		app.WithPlugin(filterpod.Name, filterpod.New),
+		app.WithPlugin(filternode.Name, filternode.New),
+		app.WithPlugin(randscore.Name, randscore.New),
 	)
 	logs.InitLogs()
 	defer logs.FlushLogs()
