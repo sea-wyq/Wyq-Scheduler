@@ -252,3 +252,24 @@ profiles:
 
 ## 测试结果（镜像调度）
 ![Alt text](img/test.png)
+
+注： 通过修改配置文件，可以修改默认插件的权重、默认插件的弃用。
+
+```
+score:
+  disabled:
+  - name: TaintToleration
+  enabled:
+  - name: ImageLocality
+    weight: 10
+  - name: randScore
+    weight: 100
+```
+![Alt text](img/t2.png)
+
+注：ImageLocality这个插件的功能是节点上正在运行的pod镜像中查询调度pod中的镜像是否存在，镜像存在的个数越多，打分越高。
+
+测试镜像："kubeoperator/node-problem-detector:v0.8.1"
+
+测试结果：因为该镜像在集群中的所有节点都在运行中，且只有一个副本，所有三个节点的结果都是1。
+![Alt text](img/t3.png)

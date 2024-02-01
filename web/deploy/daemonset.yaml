@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: scheduler-image-web
+  namespace: kube-system
+  labels:
+    k8s-app: scheduler-image-web
+spec:
+  selector:
+    matchLabels:
+      name: scheduler-image-web
+  template:
+    metadata:
+      labels:
+        name: scheduler-image-web
+    spec:
+      volumes:
+      - hostPath:
+          path: /var/run/docker.sock
+        name: dockersock
+      containers:
+      - name: scheduler-image-web
+        image: registry.cnbita.com:5000/wuyiqiang/wyq-scheduler-web:v1
+        ports:
+        - containerPort: 8088
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: dockersock

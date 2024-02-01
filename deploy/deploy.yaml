@@ -40,6 +40,5 @@ spec:
         - name: node-to-ip
           configMap:
             name: nodetoip
-            
 ---
 # --v=5 不同等级的v可以控制日志打印的等级，v5 可以打印调度器所有插件的日志信息。

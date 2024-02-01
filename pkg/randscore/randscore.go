@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -52,6 +53,9 @@ func (y *RandScore) Score(ctx context.Context, state *framework.CycleState, pod 
 	if err = json.Unmarshal(data, &NodeToIp); err != nil {
 		panic(err)
 	}
+	// 测试ImageLocality插件的功能代码
+	// nodeInfos, _ := y.h.SnapshotSharedLister().NodeInfos().List()
+	// klog.V(3).Info("NumNodes: ", nodeInfos[0].ImageStates["kubeoperator/node-problem-detector:v0.8.1"].NumNodes)
 
 	for _, env := range pod.Spec.Containers[0].Env {
 		if env.Name == "PUBLICIMAGE" {
@@ -77,4 +81,11 @@ func (y *RandScore) Score(ctx context.Context, state *framework.CycleState, pod 
 
 func (y *RandScore) ScoreExtensions() framework.ScoreExtensions {
 	return nil
+}
+
+func normalizedImageName(name string) string {
+	if strings.LastIndex(name, ":") <= strings.LastIndex(name, "/") {
+		name = name + ":latest"
+	}
+	return name
 }

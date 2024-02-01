@@ -29,9 +29,13 @@ data:
           enabled:
           - name: defalut
         score:
+          disabled:
+          - name: TaintToleration
           enabled:
+          - name: ImageLocality
+            weight: 10
           - name: randScore
-            weight: 300
+            weight: 100
         reserve:
           enabled:
           - name: defalut
